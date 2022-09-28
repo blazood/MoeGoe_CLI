@@ -6,3 +6,5 @@ torch
 Unidecode
 openjtalk>=0.3.0.dev2
 jamo
+flask
+flask-compress
