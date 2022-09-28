@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import sys
+import os
 from imp import reload
 
 reload(sys)
@@ -13,6 +14,8 @@ app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 Compress(app)
 
+model = os.environ.get("MODEL_PATH")
+config = os.environ.get("CONFIG_PATH")
 
 @app.route("/tts", methods=["post", "get"])
 def tts():
@@ -21,8 +24,8 @@ def tts():
     vits_length_scale = 1.0/request.args.get("speed", 1, type=float)
     bs = BytesIO()
     do_model(
-        r"C:\Users\blazh\Desktop\MoeTTS-dev\vits13_fix/G_79000.pth",
-        r"C:\Users\blazh\Desktop\MoeTTS-dev\vits13_fix/config.json",
+        model,
+        config,
         2,
         txt,
         bs,
